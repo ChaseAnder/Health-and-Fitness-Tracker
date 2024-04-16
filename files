@@ -1,0 +1,80 @@
+from Calculator import Date
+from Calculator import Steps_to_miles
+from Calculator import Calories_burned
+from Calorie_goal_calculator import CalorieCalculator
+import datetime
+
+date = datetime.date.today()
+
+filename = "Fitness_and_Health_Tracker.txt"
+file = open(filename, 'r')
+lines = file.readlines()
+file.close()
+
+if lines == []:
+    file = open(filename, 'w')
+    get_birthday = input("Enter your birthday(YYYY-MM-DD) -> ")
+    height = int(input("Enter height in inches -> "))
+    weight = int(input("Enter weight in lbs -> "))
+    goal = input("Enter your goal (gain, lose, or maintain) your weight -> ").lower()
+    age = int(input("Enter your age -> "))
+    gender = input("Enter your gender (male/female) -> ").lower()
+    cal_goal = CalorieCalculator(age, weight, height, gender)
+    
+    
+    file.write(f'Birthday: {get_birthday}\tHeight: {height} inches\t Weight: {weight} lbs\n')
+
+    cal_goal.add_to_file(filename)
+    
+    file.close()
+
+else:
+    for line in lines:
+        if "Height" in line:
+            height = int(line.split(" ")[-2].strip())
+            break
+    else:
+        height = int(input("Enter height in inches -> "))
+    
+    for line in lines:
+        if "Weight" in line:
+            weight = int(line.split(" ")[-2].strip())
+            break
+    else:
+        weight = int(input("Enter your weight (lbs) -> "))
+
+current_date = Date(date)        
+
+user_interface = input("User Interface\nWhat would you like to add? (steps, workout, or none) -> ").lower()
+
+if user_interface == 'steps':
+    steps = int(input("Enter your steps -> "))
+    steps_miles = Steps_to_miles(steps, height)
+    current_date.add_to_file(filename)
+    steps_miles.add_to_file(filename)
+elif user_interface == 'workout':
+    type_of_activity = input("Enter (walking, jogging, cycling, weight lifting, swimming, running, or none) -> ").lower()
+    if type_of_activity == 'none':
+        pass
+    else:
+        duration = int(input("Enter duration of your workout in minutes -> "))
+        weight = int(input("Enter weight in lbs -> "))
+        calories_burned = Calories_burned(type_of_activity, duration, weight)
+        current_date.add_to_file(filename)
+        calories_burned.add_to_file(filename)
+elif user_interface == 'none':
+    pass
+
+date = str(date)
+data = open("Fitness_and_Health_Tracker.txt", 'r')
+birth = data.readlines()
+if birth[0][15:20] == date[5:10]:
+    print("Happy Birthday!")
+
+
+goal = input("Enter your goal (gain, lose, or maintain) your weight -> ").lower()
+age = int(input("Enter your age -> "))
+gender = input("Enter your gender (male/female) -> ").lower()
+cal_goal = CalorieCalculator(age, weight, height, gender)
+
+cal_goal.add_to_file(filename)
