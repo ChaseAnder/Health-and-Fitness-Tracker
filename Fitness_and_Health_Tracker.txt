@@ -1,0 +1,9 @@
+Birthday: 2005-05-18	Height: 69 inches	 Weight: 150 lbs
+Fitness Goal: gain  Recommended Cals/Day: 2112.48
+
+2024-04-19	Calories burned: Exercise: Weight lifting, 607.50, Duration: 1.50 Hrs
+
+2024-04-19	Steps: 8911  Miles: 4.05
+
+2024-04-19Sleep: Start Time: 2024-04-19 01:30, End Time: 2024-04-19 08:44, Quality: 7.0
+Total Sleep Hours: 7.23

@@ -1,40 +1,84 @@
+'''
+Chase Anderson
+'''
+import datetime
+
+current_date = datetime.date.today()
+
+class Date:
+    def __init__(self, date):
+        self.date = date
+
+    def __str__(self):
+        return f'{current_date}'
+
+    def add_to_file(self, filename):
+        with open(filename, 'a') as file:
+            file.write(f'\n{current_date}') 
+
+class Birthday:
+    def __init__(self, year, month, day ):
+        self.month = month
+        self.day = day
+        self.year = year
+
+    def __str__(self):
+        birthday_str = f'{self.year}-{self.month}-{self.day}'
+        return birthday_str
+
+        
+
+    def __str__(self):
+        msg = f'{self.year}-{self.month}-{self.day}'
+        return msg
+    
+
+
+
+
 class Steps_to_miles:
-    #takes in steps and height(inches) with a default value of 0
+    # takes in steps and height(inches) with a default value of 0
     def __init__(self, steps = 0, height = 0):
         self.steps = steps
-        self.height = height
+        self.height = (height)  # Convert height to an integer
 
-    def get_steps(self):
-        return self.steps
-    
-    def get_height(self):
-        return self.height
-    
-    #get_distance takes the number of steps and converts it into miles based on how tall you are
     def get_distance(self):
         if self.height < 60:
-            return f'You have made a distance of {self.steps / 2640:.2f} miles'
-        #average stride length for someone 5'1 to 5'2 is 2.1 feet
+            dist = self.steps / 2640
+            return f'{dist:.2f}'
+        # average stride length for someone 5'1 to 5'2 is 2.1 feet
         elif self.height > 60 and self.height < 62:
-            return f'You have made a distance of {self.steps / 2514:.2f} miles'
+            dist = self.steps / 2514
+            return f'{dist:.2f}'
 
         elif self.height > 61 and self.height < 65:
-            return f'You have made a distance of {self.steps / 2400:.2f} miles'
-        
-        elif self. height > 64 and  self.height < 69:
-            return f'You have made a distance of {self.steps / 2296:.2f} miles'
-        
-        elif self.height > 68  and self.height < 72:
-            return f'You have made a distance of {self.steps / 2200:.2f} miles'
-        
+            dist = self.steps / 2400
+            return f'{dist:.2f}'
+
+        elif self.height > 64 and self.height < 69:
+            dist = self.steps / 2296
+            return f'{dist:.2f}'
+
+        elif self.height > 68 and self.height < 72:
+            dist = self.steps / 2200
+            return f'{dist:.2f}'
+
         elif self.height > 71 and self.height < 74:
-            return f'You have made a distance of {self.steps / 2112:.2f} miles'
-        
+            dist = self.steps / 2112
+            return f'{dist:.2f}'
+
         elif self.height > 73 and self.height < 77:
-            return f'You have made a distance of {self.steps / 2030:.2f} miles'
-        
+            dist = self.steps / 2030
+            return f'{dist:.2f}'
+
         elif self.height > 76:
-            return f'You have a distance of {self.steps / 1956:.2f} miles'
+            dist = self.steps / 1956
+            return f'{dist:.2f}'
+
+    def add_to_file(self, filename):
+        with open(filename, 'a') as file:
+            file.write(f'\tSteps: {self.steps}  Miles: {self.get_distance()}\n')
+
         
 class Calories_burned:
     #Takes type of activity and default to unknown and takes duration(minutes) and weight(lbs) set to 0 
@@ -58,18 +102,24 @@ class Calories_burned:
     #takes what type of workout you made and calculates the amount of calories you burned
     def get_cals(self):
         if self.type_of_activity == "walking":
-            return f'You burned {3.5 * self.get_duration() * self.get_weight()} calories during your walk'
+            return f'Exercise: Walk, {3.5 * self.get_duration() * self.get_weight()}'
         
         elif self.type_of_activity == "jogging":
-            return f'You burned {7 * self.get_duration() * self.get_weight():.2f} calories during your jog'
+            return f'Exercise: Jog, {7 * self.get_duration() * self.get_weight():.2f}'
         
         elif self.type_of_activity == "cycling":
-            return f'You burned {8 * self.get_duration() * self.get_weight():.2f} calories during you bike ride'
+            return f'Exercise: Biking, {8 * self.get_duration() * self.get_weight():.2f}'
         
-        elif self.type_of_activity == "swimming" or self.type_of_activity == "weight lifting":
-            return f'You burned {6 * self.get_duration() * self.get_weight():.2f} calories during your workout'
+        elif self.type_of_activity == "swimming":
+            return f'Exercise: Swimming, {6 * self.get_duration() * self.get_weight():.2f}'
+        
+        elif self.type_of_activity == "weight lifting":
+            return f'Exercise: Weight lifting, {6 * self.get_duration() * self.get_weight():.2f}'
         
         elif self.type_of_activity == "running":
-            return f'You burned {9.8 * self.get_duration() * self.get_weight():.2f} calories during your run'
-        else:
-            return f'Invalid input'
+            return f'Exercise: Run, {9.8 * self.get_duration() * self.get_weight():.2f}'
+        
+    def add_to_file(self,filename):
+        with open(filename, 'a') as file:
+            file.write(f'\tCalories burned: {self.get_cals()}, Duration: {self.duration:.2f} Hrs\n')
+
